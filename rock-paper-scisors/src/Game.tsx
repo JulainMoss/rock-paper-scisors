@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import rock from './assets/rock.svg'
 import paper from './assets/paper.svg'
 import scissors from './assets/scissors.svg'
@@ -9,9 +9,15 @@ export default function Game({opponent}) {
     const [playermove, setPlayermove] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
     const [score, setScore] = useState([0, 0])
+    const isLoadingRef = useRef(false);
+    
+    const setGlobalLoading = (val) => {
+        isLoadingRef.current = val;
+        setIsLoading(val);
+    };
 
     const getAimove = async (currentOpponent) => {
-        setIsLoading(true);
+        setGlobalLoading(true);
         try {
             const res = await fetch(`http://localhost:8000/api/${currentOpponent}`);
             const json = await res.json();
@@ -21,24 +27,25 @@ export default function Game({opponent}) {
             console.error("Błąd:", error);
             return null; 
         } finally {
-            setIsLoading(false);
+            setGlobalLoading(false);
         }
     };
 
     useEffect(() => {
         const handleGlobalKeyUp = async (e) => {
+            if (isLoadingRef.current    ) return;
+            
             let move;
-            if (e.key === 'Control') {
-                move = 0;
-            } else if (e.key === 'Shift') {
-                move = 1;
-            } else if (e.key === 'Enter') {
-                move = 2;
-            } else {return};
+            if (e.key === 'Control') move = 0;
+            else if (e.key === 'Shift') move = 1;
+            else if (e.key === 'Enter') move = 2;
+            else return;
             setPlayermove(move)
             
             const response = await getAimove(opponent)
             setAimove(response);
+
+            if (response === null) return;
             if (move === response) {
                 return
             } else if ((move === 0 && response === 2) || (move === 1 && response === 0) || (move === 2 && response === 1)) {

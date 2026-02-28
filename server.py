@@ -9,7 +9,12 @@ app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173"])
 
 @app.get("/api/random")
-def get_data():
+def get_random():
+    return {"wiadomosc": random.choice([0, 1, 2])}
+
+@app.get("/api/other-random")
+def get_random_with_delay():
+    time.sleep(1)
     return {"wiadomosc": random.choice([0, 1, 2])}
 
 

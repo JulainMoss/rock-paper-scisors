@@ -19,6 +19,9 @@ export default function Select({game, setGame, setOpponent}) {
         <button onClick={() => {setGame(!game); setOpponent("random")}}>
           Play random
         </button>
+        <button onClick={() => {setGame(!game); setOpponent("other-random")}}>
+          Play smarter random
+        </button>
       </div>
     </>
   )
