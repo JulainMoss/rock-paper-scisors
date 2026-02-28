@@ -6,12 +6,10 @@ import uvicorn
 
 app = FastAPI()
 
-# Ważne: Musisz zezwolić na komunikację z innego portu (CORS)
 app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173"])
 
 @app.get("/api/random")
 def get_data():
-    time.sleep(1)  # Symulacja opóźnienia
     return {"wiadomosc": random.choice([0, 1, 2])}
 
 
