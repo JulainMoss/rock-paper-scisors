@@ -26,7 +26,7 @@ export default function Game({opponent}: GameProps) {
             const res = await fetch(`http://localhost:8000/api/${currentOpponent}`);
             const json = await res.json();
             
-            return json.wiadomosc; // ZWRACAMY wartość do await
+            return json.move; // ZWRACAMY wartość do await
         } catch (error) {
             console.error("Błąd:", error);
             return null; 
