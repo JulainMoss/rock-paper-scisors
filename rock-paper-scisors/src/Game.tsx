@@ -3,7 +3,11 @@ import rock from './assets/rock.svg'
 import paper from './assets/paper.svg'
 import scissors from './assets/scissors.svg'
 
-export default function Game({opponent}) {
+interface GameProps {
+    opponent: string;
+}
+
+export default function Game({opponent}: GameProps) {
     const moves = [rock, paper, scissors]
     const [aimove, setAimove] = useState(0)
     const [playermove, setPlayermove] = useState(0)
@@ -11,12 +15,12 @@ export default function Game({opponent}) {
     const [score, setScore] = useState([0, 0])
     const isLoadingRef = useRef(false);
     
-    const setGlobalLoading = (val) => {
+    const setGlobalLoading = (val: boolean) => {
         isLoadingRef.current = val;
         setIsLoading(val);
     };
 
-    const getAimove = async (currentOpponent) => {
+    const getAimove = async (currentOpponent: string) => {
         setGlobalLoading(true);
         try {
             const res = await fetch(`http://localhost:8000/api/${currentOpponent}`);
@@ -32,8 +36,8 @@ export default function Game({opponent}) {
     };
 
     useEffect(() => {
-        const handleGlobalKeyUp = async (e) => {
-            if (isLoadingRef.current    ) return;
+        const handleGlobalKeyUp = async (e: KeyboardEvent) => {
+            if (isLoadingRef.current) return;
             
             let move;
             if (e.key === 'Control') move = 0;

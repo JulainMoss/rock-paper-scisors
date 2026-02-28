@@ -1,10 +1,17 @@
 import rock from './assets/rock.svg'
 import paper from './assets/paper.svg'
 import scissors from './assets/scissors.svg'
+import { type Dispatch, type SetStateAction } from 'react';
 
 import './App.css'
 
-export default function Select({game, setGame, setOpponent}) {  
+interface SelectProps {
+  game: boolean;
+  setGame: Dispatch<SetStateAction<boolean>>;
+  setOpponent: Dispatch<SetStateAction<string>>;
+}
+
+export default function Select({game, setGame, setOpponent}: SelectProps) {  
   
 
   return (

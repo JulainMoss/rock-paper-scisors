@@ -17,6 +17,10 @@ def get_random_with_delay():
     time.sleep(1)
     return {"wiadomosc": random.choice([0, 1, 2])}
 
+@app.get("/api/log-in")
+def log_in():
+    return {"wiadomosc": "Zalogowano pomyślnie!"}
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
