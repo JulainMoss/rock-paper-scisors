@@ -1,36 +1,41 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
 .logo {
-  height: 6em;
+  height: 8em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #808080aa);
+  animation-delay: 2s;
+  animation: logo-spin 0.1s linear;
+  transform: rotate(20deg);
+  height: 10em;
+  
 }
 
 @keyframes logo-spin {
   from {
-    transform: rotate(0deg);
+    height: 8em;
+    /* transform: rotate(0deg); */
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(30deg);
+    height: 10em;
+    
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
+  /* a:nth-of-type(1) .logo {
     animation: logo-spin infinite 20s linear;
-  }
+  } */
 }
 
 .card {
@@ -39,4 +44,25 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.move {
+  height: 18em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.instructions {
+  font-size: 1.5em;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.player-text {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 1rem;
+  font-size: 1.2em;
 }
